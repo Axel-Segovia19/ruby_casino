@@ -1,4 +1,5 @@
 require_relative 'user'
+require_relative 'roulette'
 
 class App
   attr_accessor :user
@@ -36,7 +37,8 @@ def menu
 
   user_input = gets.strip.to_i
   if user_input == 1 
-    puts "test"
+    Roulette.new(@user)
+    menu
   elsif user_input == 2
     puts "test"
   elsif user_input == 3
