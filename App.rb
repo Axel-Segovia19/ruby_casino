@@ -1,5 +1,6 @@
 require_relative 'user'
 require_relative 'roulette'
+require_relative 'rps'
 
 class App
   attr_accessor :user
@@ -19,12 +20,10 @@ def create_user
   f_name = gets.strip
   puts "What is your last name?"
   l_name = gets.strip
-  puts "How old are you?"
-  age = gets.strip.to_i
-  puts "How much money did you bring with you?"
-  bank_roll = gets.strip.to_i
+  # puts "How much money did you bring with you?"
+  # bank_roll = gets.strip.to_i
 
-  @user = User.new(f_name, l_name, age, bank_roll)
+  @user = User.new(f_name, l_name)
   
   menu
 end
@@ -32,7 +31,7 @@ end
 def menu
   puts "Which game would you like to play?"
   puts "1) Roulette"
-  puts "2) War"
+  puts "2) Rock Paper Sissors"
   puts "3) Exit"
 
   user_input = gets.strip.to_i
@@ -40,7 +39,8 @@ def menu
     Roulette.new(@user)
     menu
   elsif user_input == 2
-    puts "test"
+    RPS.new(@user)
+    menu
   elsif user_input == 3
     puts "bye"
     exit
