@@ -69,26 +69,17 @@ attr_accessor :user
     elsif (@computer_choice == @Rock && @player_choice == @Paper)
     puts "Player wins".cyan.underline
     seperator
-    puts "You bet" + "$ #{@user_bet}".light_green
-    new_bankroll = @user.bank_roll + add_money(@user_bet)
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+    you_win
     play
     elsif (@computer_choice == @Rock && @player_choice == @Scissors)
     puts "Computer wins".red.underline
     seperator
-    puts "You bet" + "$#{@user_bet}".light_green
-    new_bankroll = @user.bank_roll - @user_bet
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+    you_lose
     play
     elsif (@computer_choice == @Paper && @player_choice == @Rock) 
     puts "computer wins".red.underline
     seperator
-    puts "You bet" + "$#{@user_bet}".light_green
-    new_bankroll = @user.bank_roll - @user_bet
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+    you_lose
         play
     elsif (@computer_choice == @Paper && @player_choice == @Paper)
     puts "draw".yellow
@@ -96,26 +87,17 @@ attr_accessor :user
     elsif (@computer_choice == @Paper && @player_choice == @Scissors)
     puts "player wins".cyan.underline
     seperator
-    puts "You bet" + "$#{@user_bet}".light_green
-    new_bankroll = @user.bank_roll + add_money(@user_bet)
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+   you_win
     play 
     elsif (@computer_choice == @Scissors && @player_choice == @Rock) 
     puts "player wins".cyan.underline
     seperator
-    puts "You bet" + "$#{@user_bet}".light_green
-    new_bankroll = @user.bank_roll + add_money(@user_bet)
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+   you_win
         play
     elsif (@computer_choice == @Scissors && @player_choice == @Paper)
     puts "computer wins".red.underline
     seperator
-    puts "You bet" + "$ #{@user_bet}".light_green
-    new_bankroll = @user.bank_roll - @user_bet
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+    you_lose
     play
     elsif (@computer_choice == @Scissors && @player_choice == @Scissors)
     puts "draw".yellow
@@ -127,8 +109,20 @@ attr_accessor :user
     end
 end
 
+def you_win
+  puts "You bet" + "$ #{@user_bet}".light_green
+    new_bankroll = @user.bank_roll + add_money(@user_bet)
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
 
+end
 
+def you_lose
+  puts "You bet" + "$ #{@user_bet}".light_green
+  new_bankroll = @user.bank_roll - @user_bet
+  @user.change_bankroll(new_bankroll)
+  puts "You now have" + "$ #{user.bank_roll}".light_green
+end
 
 def play
   while (@player_choice != 4)

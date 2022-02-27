@@ -69,42 +69,51 @@ end
       puts "We picked #{@result1} and #{@result2}"
       seperator
       puts "WOW YOU GOT BOTH RIGHT".green.underline
-      puts "You bet" + "$ #{@user_bet2}".light_green
-    new_bankroll = @user.bank_roll + big_prize(@user_bet2)
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "#{user.bank_roll}".light_green
+      win_big
     seperator
     menu
     elsif @user_guess == @result1 && @user_pick != @result2
       puts "We picked #{@result1} and #{@result2}"
       seperator
       puts "You Win! got the number right just not the color.".green.underline
-      puts "You bet" + "$ #{@user_bet2}".light_green
-    new_bankroll = @user.bank_roll + add_money(@user_bet2)
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" "$#{user.bank_roll}".light_green
+      you_win
     seperator
     menu
     elsif @user_guess != @result1 && @user_pick == @result2
       puts "We picked #{@result1} and #{@result2}"
       seperator
       puts "You Win! got the number wrong but got the color right.".green.underline
-      puts "You bet" + "$ #{@user_bet2}".light_green
-    new_bankroll = @user.bank_roll + add_money(@user_bet2)
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+      you_win
     seperator
     menu
     else
-      puts "You Lose!"
+      puts "You Lose!".red
       seperator
       puts "We picked #{@result1} and #{@result2}"
-      puts "You bet" + "$#{@user_bet2}".light_green
-    new_bankroll = @user.bank_roll - @user_bet2
-    @user.change_bankroll(new_bankroll)
-    puts "You now have" + "$ #{user.bank_roll}".light_green
+      you_lose
     seperator
     menu
     end
+  end
+
+  def win_big
+    puts "You bet" + "$ #{@user_bet2}".light_green
+    new_bankroll = @user.bank_roll + big_prize(@user_bet2)
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "#{user.bank_roll}".light_green
+  end
+
+  def you_lose
+    puts "You bet" + "$#{@user_bet2}".light_green
+    new_bankroll = @user.bank_roll - @user_bet2
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
+  end
+
+  def you_win
+    puts "You bet" + "$ #{@user_bet2}".light_green
+    new_bankroll = @user.bank_roll + add_money(@user_bet2)
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
   end
 end
