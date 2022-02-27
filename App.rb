@@ -1,6 +1,7 @@
 require_relative 'user'
 require_relative 'roulette'
 require_relative 'rps'
+require 'colorize'
 
 class App
   attr_accessor :user
@@ -10,9 +11,12 @@ welcome
 @user = create_user
 end 
 
+def seperator
+  puts "*" * 10
+end
 
 def welcome
-  puts "Welcome to the Casino Royal"
+  puts "**Welcome to the Casino Royal**".cyan.underline
 end
 
 def create_user
@@ -20,19 +24,20 @@ def create_user
   f_name = gets.strip
   puts "What is your last name?"
   l_name = gets.strip
-  # puts "How much money did you bring with you?"
-  # bank_roll = gets.strip.to_i
+  puts "How much money did you bring?"
+  bank_roll = gets.strip.to_i
 
-  @user = User.new(f_name, l_name)
+  @user = User.new(f_name, l_name, bank_roll)
   
   menu
 end
 
 def menu
-  puts "Which game would you like to play?"
-  puts "1) Roulette"
-  puts "2) Rock Paper Sissors"
-  puts "3) Exit"
+  puts "Which game would you like to play?".cyan.underline
+  puts "1) ".light_green + "Roulette"
+  puts "2) ".light_green + "Rock Paper Sissors"
+  puts "3) ".light_green + "Exit"
+  seperator
 
   user_input = gets.strip.to_i
   if user_input == 1 
@@ -42,7 +47,7 @@ def menu
     RPS.new(@user)
     menu
   elsif user_input == 3
-    puts "bye"
+    puts "Thank you for coming!".magenta
     exit
   else
     menu

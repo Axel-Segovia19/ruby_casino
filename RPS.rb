@@ -1,5 +1,8 @@
+require_relative 'math'
+require 'colorize'
 
 class RPS
+include Math
 attr_accessor :user
 
 
@@ -14,23 +17,30 @@ attr_accessor :user
     play
   end
 
+  def seperator
+    puts "*" * 10
+  end
+
   def welcome1
-    puts "Hello" + " " + @user.full_name
+    seperator
+    puts "Hello" + " " + @user.full_name.cyan
     puts "This is Rock Paper Sissors"
     puts "The game where if you guess right you beat your opponent"
-    puts "1) rock"
-    puts "2) paper"
-    puts "3) scissors"
-    puts "4) Exit"
+    puts "How much would you like to bet?"
+    seperator
+    @user_bet = gets.strip.to_i
+    welcome2
+  end
+
+  def welcome2
+    puts "1) Rock".light_red
+    puts "2) Paper".blue
+    puts "3) Scissors".yellow
+    puts "4) View balance and play a different game!"
+    seperator
+
     @player_choice = gets.to_i
   end
-  
-  # def menu
-  #   puts "1) rock"
-  #   puts "2) paper"
-  #   puts "3) scissors"
-  #   @player_choice = gets.to_i
-  # end
 
   def result
     @computer_choice = rand (1..3) 
@@ -48,49 +58,72 @@ attr_accessor :user
         end
     end
 
-    if (@player_choice == 5)
-      puts "Your current balance is dollars"
+    if (@player_choice == 4)
+      puts "Your current balance is"
+      puts "$ #{@user.bank_roll}".light_green
+      seperator
     elsif (@computer_choice == @Rock && @player_choice == @Rock)
-    puts "Round is a draw"
+    puts "draw".yellow
+    seperator
         play
     elsif (@computer_choice == @Rock && @player_choice == @Paper)
-    puts "Player wins"
-   
-    puts "You won 10 bucks"
+    puts "Player wins".cyan.underline
+    seperator
+    puts "You bet" + "$ #{@user_bet}".light_green
+    new_bankroll = @user.bank_roll + add_money(@user_bet)
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
     play
     elsif (@computer_choice == @Rock && @player_choice == @Scissors)
-    puts "Computer wins"
-    puts "You lost 2 dollars"
+    puts "Computer wins".red.underline
+    seperator
+    puts "You bet" + "$#{@user_bet}".light_green
+    new_bankroll = @user.bank_roll - @user_bet
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
     play
     elsif (@computer_choice == @Paper && @player_choice == @Rock) 
-    puts "computer wins"
-    
-    puts "You lost 2 dollars"
+    puts "computer wins".red.underline
+    seperator
+    puts "You bet" + "$#{@user_bet}".light_green
+    new_bankroll = @user.bank_roll - @user_bet
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
         play
     elsif (@computer_choice == @Paper && @player_choice == @Paper)
-    puts "draw"
+    puts "draw".yellow
     play
     elsif (@computer_choice == @Paper && @player_choice == @Scissors)
-    puts "player wins"
-   
-    puts "You won 10 bucks"
+    puts "player wins".cyan.underline
+    seperator
+    puts "You bet" + "$#{@user_bet}".light_green
+    new_bankroll = @user.bank_roll + add_money(@user_bet)
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
     play 
     elsif (@computer_choice == @Scissors && @player_choice == @Rock) 
-    puts "player wins"
-    
-    puts "You won 10 bucks"
+    puts "player wins".cyan.underline
+    seperator
+    puts "You bet" + "$#{@user_bet}".light_green
+    new_bankroll = @user.bank_roll + add_money(@user_bet)
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
         play
     elsif (@computer_choice == @Scissors && @player_choice == @Paper)
-    # puts "case eight"
-    puts "computer wins"
-  
-    puts "You lost 2 dollars"
+    puts "computer wins".red.underline
+    seperator
+    puts "You bet" + "$ #{@user_bet}".light_green
+    new_bankroll = @user.bank_roll - @user_bet
+    @user.change_bankroll(new_bankroll)
+    puts "You now have" + "$ #{user.bank_roll}".light_green
     play
     elsif (@computer_choice == @Scissors && @player_choice == @Scissors)
-    # puts "case nine"
-    puts "draw"
+    puts "draw".yellow
+    seperator
     play
     else 
+    puts "error lets start all over"
+    play
     end
 end
 
@@ -102,12 +135,9 @@ def play
       welcome1
       result
   
-end
-if @player_choice == 4
-  exit
-   
-end
-end
+    end
+
+  end
 
 
 end
